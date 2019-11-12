@@ -3,9 +3,9 @@ const ENV = {
     mysql: {
       logging: true,
       databaseName: "test",
-      username: "remote",
-      password: "123456789",
-      host: "",
+      username: "root",
+      password: "1234567890",
+      host: "127.0.0.1",
       port: 3306,
       baseUrl: "",
       forceUpdateModel: true
@@ -33,10 +33,10 @@ const ENV = {
   online: {
     mysql: {
       logging: false,
-      databaseName: "miraclesDB",
-      username: "localhost",
-      password: "123456789",
-      host: "127.0.0.1",
+      databaseName: "",
+      username: "",
+      password: "",
+      host: "",
       port: 3306,
       baseUrl: "",
       forceUpdateModel: false
