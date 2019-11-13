@@ -3,12 +3,12 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
 const CODE = require("../code");
-let dao = require("../dao");
+const dao = require("../dao");
 
 router.get("/", async function(ctx, next) {
   let get = ctx.request.query;
   let page = get.page;
-  let pageSize = get.pageSize;
+  let pageSize = get.size;
 
   const whereJson = {
     name: {
@@ -16,7 +16,7 @@ router.get("/", async function(ctx, next) {
     }
   };
 
-  let res = await dao.list(whereJson, +page, +pageSize);
+  const res = await dao.list(whereJson, +page, +pageSize);
 
   const data = res
     ? {

@@ -1,13 +1,14 @@
 const router = require("koa-router")();
 const CODE = require("../code");
-let dao = require("../dao");
+const dao = require("../dao");
+
+const md5 = require("../../../utils/libs/md5");
 
 router.put("/", async function(ctx, next) {
-  let get = ctx.request.query;
   let post = ctx.request.body;
 
   whereJson = {
-    email: post.email
+    id: post.id
   };
 
   const isExisted = await dao.search(whereJson);
@@ -25,11 +26,11 @@ router.put("/", async function(ctx, next) {
       password: md5(post.password)
     },
     {
-      email: post.email
+      id: post.id
     }
   );
 
-  return ctx.return(CODE.USER_NORMAL_SUCCESS, null);
+  return ctx.return(0, CODE.USER_NORMAL_SUCCESS, null);
 });
 
 module.exports = router.routes();

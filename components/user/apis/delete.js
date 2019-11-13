@@ -1,22 +1,18 @@
 const router = require("koa-router")();
 const CODE = require("../code");
-let dao = require("../dao");
+const dao = require("../dao");
 
-router.post("/", async function(ctx, next) {
+router.post("/", async function(ctx) {
   let post = ctx.request.body;
 
   // FIXME: 区别 字符串 STRING 和 TEXT
-  const email = post.email;
+  const id = post.id;
 
-  whereJson = {
-    email: String(email)
-  };
-
-  const isExisted = await dao.search(whereJson);
+  const isExisted = await dao.search({ id: String(id) });
 
   if (isExisted) {
     const whereJson = {
-      email: post.email
+      id: id
     };
 
     const updateJson = {
@@ -26,11 +22,11 @@ router.post("/", async function(ctx, next) {
     // 删除的就不能在更新
     await dao.update(updateJson, whereJson);
 
-    await dao.delete(post.email);
+    await dao.delete(id);
 
-    return ctx.return(0, CODE.USER_DELETE_SUCCESS, {});
+    return ctx.return(0, CODE.USER_DELETE_SUCCESS, null);
   } else {
-    return ctx.return(-1, CODE.USER_NOT_EXIST, {});
+    return ctx.return(-1, CODE.USER_NOT_EXIST, null);
   }
 });
 

@@ -11,6 +11,17 @@ const dao = {
     return data;
   },
 
+  // 用户注册
+  register: async function(userJson) {
+    const data = await model.findOrCreate({
+      where: {
+        phone: userJson.phone
+      },
+      logging: logging
+    });
+    return data;
+  },
+
   // 批量增加
   batchCreate: async function(users) {
     let data = await model.bulkCreate(users, {
@@ -20,10 +31,10 @@ const dao = {
   },
 
   // 删除
-  delete: async function(email = null) {
+  delete: async function(id = null) {
     let data = await model.destroy({
       where: {
-        email: email
+        id: id
       },
       logging: logging
     });
@@ -41,7 +52,11 @@ const dao = {
           "created_at",
           "deleted_at",
           "updated_at",
-          "status"
+          "status",
+          "createdAt",
+          "created",
+          "updatedAt",
+          "deletedAt"
         ]
       }
     });
@@ -49,14 +64,23 @@ const dao = {
   },
 
   // 查找
-  search: async function(whereJson = {}, needPass = false) {
-    const exclude = needPass ? ["password"] : [];
-
+  search: async function(whereJson = {}, needDel = true) {
     let data = await model.findOne({
       where: whereJson,
       attributes: {
-        exclude: exclude
-      }
+        exclude: [
+          "password",
+          "created_at",
+          "deleted_at",
+          "updated_at",
+          "status",
+          "createdAt",
+          "created",
+          "updatedAt",
+          "deletedAt"
+        ]
+      },
+      paranoid: needDel
     });
     return data;
   },
@@ -74,7 +98,11 @@ const dao = {
           "created_at",
           "deleted_at",
           "updated_at",
-          "status"
+          "status",
+          "createdAt",
+          "created",
+          "updatedAt",
+          "deletedAt"
         ]
       }
     });

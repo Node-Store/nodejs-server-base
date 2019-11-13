@@ -1,26 +1,27 @@
+const router = require("koa-router")();
+
 const CODE = require("../code");
+const md5 = require("../../../utils/libs/md5");
+const dao = require("../dao");
 
-let router = require("koa-router")();
+router.post("/", async function(ctx) {
+  const post = ctx.request.body;
 
-let md5 = require("../../../utils/libs/md5");
+  const { phone, password, name } = post;
 
-let dao = require("../dao");
-
-router.post("/", async function(ctx, next) {
-  let post = ctx.request.body;
-
-  const { email, password, name } = post;
-
-  const existedUser = await dao.search({ email });
+  const existedUser = await dao.search({ phone: phone }, false);
 
   let data = null;
 
   // Email is only one
   if (existedUser) {
-    return ctx.return(-1, CODE.USER_EXIST, data);
+    if (existedUser.delete_at) {
+      return ctx.return(-1, CODE.USER_DELETED, null);
+    }
+    return ctx.return(-1, CODE.USER_EXIST, null);
   } else {
     data = await dao.add({
-      email,
+      phone,
       name,
       password: md5(password)
     });

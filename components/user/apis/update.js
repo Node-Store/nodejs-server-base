@@ -5,20 +5,18 @@ const dao = require("../dao");
 const md5 = require("../../../utils/libs/md5");
 
 router.put("/", async function(ctx, next) {
-  let get = ctx.request.query;
   let post = ctx.request.body;
 
   if (post.password) {
     post.password = md5(post.password);
   }
 
-  // 暂时通过作为 邮箱 唯一标识进行更新
   const where = {
-    email: post.email
+    id: post.id
   };
 
   const isExisted = await dao.search({
-    email: post.email
+    id: post.id
   });
 
   if (isExisted) {

@@ -7,7 +7,7 @@ router.post("/", async function(ctx, next) {
   let post = ctx.request.body;
 
   let res_user = await dao.search({
-    email: post.email
+    phone: post.phone
   });
 
   if (!res_user) {
@@ -20,14 +20,14 @@ router.post("/", async function(ctx, next) {
     const data = {
       id: res_user.id,
       name: res_user.name,
-      email: res_user.email
+      phone: res_user.phone
     };
 
-    ctx.session.user = data;
+    // ctx.session.user = data;
 
     return ctx.return(0, CODE.USER_LOGIN_SUCCESS, data);
   } else {
-    ctx.session.user = null;
+    // ctx.session.user = null;
 
     return ctx.return(-1, CODE.USER_PASSWORD_NOT_CORRECT, null);
   }

@@ -1,11 +1,12 @@
 const CODE = require("../code");
 
-let router = require("koa-router")();
+const router = require("koa-router")();
 
-let md5 = require("../../../utils/libs/md5");
+const md5 = require("../../../utils/libs/md5");
 
-let dao = require("../dao");
+const dao = require("../dao");
 
+// TODO: 待完善校验
 router.post("/", async function(ctx, next) {
   let post = ctx.request.body;
 
@@ -15,7 +16,7 @@ router.post("/", async function(ctx, next) {
 
   await dao.batchCreate(post);
 
-  return ctx.return(CODE.USER_CREATE_SUCCESS, "User added success!", {});
+  return ctx.return(0, CODE.USER_CREATE_SUCCESS, null);
 });
 
 module.exports = router.routes();
