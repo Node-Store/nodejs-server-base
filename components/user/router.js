@@ -17,6 +17,7 @@ const registerRoute = function(router) {
   router.use("/api/user/profile", profile);
   router.use("/api/user/update", update);
   router.use("/api/user/register", register);
+  // router.use("/api/user/signup", register);
   router.use("/api/user/batchCreate", batchCreate);
 };
 
