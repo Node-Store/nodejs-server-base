@@ -2,7 +2,7 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const cors = require("koa2-cors");
 const xmlParser = require("koa-xml-body");
-const body = require("koa-body");
+const bodyParser = require("koa-body");
 
 // Instance
 const app = new Koa();
@@ -35,7 +35,7 @@ app.context.log = function(key = "untitled log", value = "") {
 };
 
 // File Upload Support
-app.use(body({ multipart: true }));
+app.use(bodyParser({ multipart: true }));
 
 // Xml Support
 app.use(xmlParser());

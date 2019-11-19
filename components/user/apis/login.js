@@ -3,10 +3,11 @@ const router = require("koa-router")();
 const md5 = require("../../../utils/libs/md5");
 const CODE = require("../code");
 const dao = require("../dao");
+
 router.post("/", async function(ctx, next) {
   let post = ctx.request.body;
 
-  let res_user = await dao.search({
+  let res_user = await dao.searchLogin({
     phone: post.phone
   });
 
@@ -17,18 +18,18 @@ router.post("/", async function(ctx, next) {
   const correct_pwd = res_user.password === md5(post.password);
 
   if (correct_pwd) {
-    const data = {
-      id: res_user.id,
-      name: res_user.name,
-      phone: res_user.phone
-    };
+    res_user.password = null;
+    ctx.cookies.set("uid", res_user.id, {
+      domain: "localhost", // 写cookie所在的域名
+      path: "/", // 写cookie所在的路径
+      maxAge: 10 * 60 * 1000, // cookie有效时长
+      expires: new Date("2200-02-15"), // cookie失效时间
+      httpOnly: false, // 是否只用于http请求中获取
+      overwrite: false // 是否允许重写
+    });
 
-    // ctx.session.user = data;
-
-    return ctx.return(0, CODE.USER_LOGIN_SUCCESS, data);
+    return ctx.return(0, CODE.USER_LOGIN_SUCCESS, res_user);
   } else {
-    // ctx.session.user = null;
-
     return ctx.return(-1, CODE.USER_PASSWORD_NOT_CORRECT, null);
   }
 });

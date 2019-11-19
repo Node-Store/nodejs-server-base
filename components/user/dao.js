@@ -14,9 +14,7 @@ const dao = {
   // 用户注册
   register: async function(userJson) {
     const data = await model.findOrCreate({
-      where: {
-        phone: userJson.phone
-      },
+      where: userJson,
       logging: logging
     });
     return data;
@@ -81,6 +79,26 @@ const dao = {
         ]
       },
       paranoid: needDel
+    });
+    return data;
+  },
+
+  // 登录
+  searchLogin: async function(whereJson = {}) {
+    let data = await model.findOne({
+      where: whereJson,
+      attributes: {
+        exclude: [
+          "created_at",
+          "deleted_at",
+          "updated_at",
+          "status",
+          "createdAt",
+          "created",
+          "updatedAt",
+          "deletedAt"
+        ]
+      }
     });
     return data;
   },

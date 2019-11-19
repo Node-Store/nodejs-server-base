@@ -21,7 +21,11 @@ router.post("/", async function(ctx) {
 
   const md5Pass = md5(password);
 
-  const result = await dao.register({ phone, password: md5Pass, name });
+  const result = await dao.register({
+    phone: phone,
+    password: md5Pass,
+    name: name
+  });
 
   const [user, created] = result;
 
