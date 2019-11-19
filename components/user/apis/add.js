@@ -16,9 +16,9 @@ router.post("/", async function(ctx) {
   // Email is only one
   if (existedUser) {
     if (existedUser.delete_at) {
-      return ctx.return(-1, CODE.USER_DELETED, null);
+      return ctx.return(1, CODE.USER_DELETED, null);
     }
-    return ctx.return(-1, CODE.USER_EXIST, null);
+    return ctx.return(1, CODE.USER_EXIST, null);
   } else {
     data = await dao.add({
       phone,

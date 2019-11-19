@@ -16,7 +16,7 @@ router.post("/", async function(ctx) {
   }
 
   if (!phone || !password) {
-    return ctx.return(-1, CODE.USER_NOT_VALID_QUERY, null);
+    return ctx.return(1, CODE.USER_NOT_VALID_QUERY, null);
   }
 
   const md5Pass = md5(password);
@@ -33,7 +33,7 @@ router.post("/", async function(ctx) {
   if (created) {
     return ctx.return(0, CODE.USER_CREATE_SUCCESS, user);
   } else {
-    return ctx.return(-1, CODE.USER_EXIST, null);
+    return ctx.return(1, CODE.USER_EXIST, null);
   }
 });
 

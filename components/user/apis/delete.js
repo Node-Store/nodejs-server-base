@@ -26,7 +26,7 @@ router.post("/", async function(ctx) {
 
     return ctx.return(0, CODE.USER_DELETE_SUCCESS, null);
   } else {
-    return ctx.return(-1, CODE.USER_NOT_EXIST, null);
+    return ctx.return(1, CODE.USER_NOT_EXIST, null);
   }
 });
 

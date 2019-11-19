@@ -31,7 +31,7 @@ router.get("/", async function(ctx, next) {
   if (data) {
     return ctx.return(0, CODE.USER_NORMAL_SUCCESS, data);
   } else {
-    return ctx.return(-1, CODE.USER_NORMAL_FAILED, data);
+    return ctx.return(1, CODE.USER_NORMAL_FAILED, data);
   }
 });
 

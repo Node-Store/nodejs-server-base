@@ -23,7 +23,7 @@ router.put("/", async function(ctx, next) {
     await dao.update(post, where);
     return ctx.return(0, CODE.USER_NORMAL_SUCCESS, null);
   } else {
-    return ctx.return(-1, CODE.USER_NOT_EXIST, null);
+    return ctx.return(1, CODE.USER_NOT_EXIST, null);
   }
 });
 

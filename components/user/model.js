@@ -81,7 +81,7 @@ const model = sequelize.define(
 );
 
 model.sync({ force: force }).then(() => {
-  console.info("=== 🎉  🎉  🎉 , User Model Async Success! === ");
+  console.info("=== 🎉  🎉  🎉 User Model Async Success! === ");
 });
 
 module.exports = model;

@@ -10,10 +10,10 @@ router.get("/", async function(ctx, next) {
   });
 
   if (!res_user) {
-    return ctx.return(-1, CODE.USER_NOT_EXIST, null);
+    return ctx.return(1, CODE.USER_NOT_EXIST, null);
   }
 
-  return ctx.return(-1, CODE.USER_NORMAL_SUCCESS, res_user);
+  return ctx.return(1, CODE.USER_NORMAL_SUCCESS, res_user);
 });
 
 module.exports = router.routes();

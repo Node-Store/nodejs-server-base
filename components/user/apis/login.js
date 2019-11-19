@@ -30,7 +30,7 @@ router.post("/", async function(ctx, next) {
 
     return ctx.return(0, CODE.USER_LOGIN_SUCCESS, res_user);
   } else {
-    return ctx.return(-1, CODE.USER_PASSWORD_NOT_CORRECT, null);
+    return ctx.return(1, CODE.USER_PASSWORD_NOT_CORRECT, null);
   }
 });
 

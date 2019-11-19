@@ -3,6 +3,12 @@ const Router = require("koa-router");
 const cors = require("koa2-cors");
 const xmlParser = require("koa-xml-body");
 const bodyParser = require("koa-body");
+const session = require("koa-session");
+
+const ErrorHandler = require("./utils/middleware/error");
+const AuthHandler = require("./utils/middleware/auth");
+
+const daoLog = require("./components/log/dao");
 
 // Instance
 const app = new Koa();
@@ -44,6 +50,9 @@ app.use(function(ctx, next) {
   return next();
 });
 
+// session key
+app.keys = ["I am a session key! My random number is 6291619!"];
+
 // Cross origin Setting
 app.use(
   cors({
@@ -55,6 +64,29 @@ app.use(
     allowHeaders: ["Content-Type", "Authorization", "Accept"]
   })
 );
+
+// Koa Session https://github.com/koajs/session
+app.use(
+  session(
+    {
+      key: "koa:sess",
+      maxAge: 86400000,
+      autoCommit: true,
+      overwrite: true,
+      httpOnly: true,
+      signed: true,
+      rolling: false,
+      renew: false
+    },
+    app
+  )
+);
+
+// Error Handler
+app.use(ErrorHandler);
+
+// Auth Handler
+app.use(AuthHandler);
 
 // give router to routes, inside will use `use`
 routes(router);
