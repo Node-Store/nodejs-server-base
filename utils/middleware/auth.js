@@ -16,13 +16,13 @@ let authHandler = async function(ctx, next) {
     /**
      * 通过校验session中是否有用户信息
      */
-    if (!ctx.session.user) {
+    if (!ctx.cookies.get("user_id")) {
       return ctx.return(
         globalVariable.status.not_login.code,
         globalVariable.status.not_login.message,
         null
       );
-    } else if (ctx.session._expire < new Date().getTime()) {
+    } else if (ctx.cookies._expire < new Date().getTime()) {
       return ctx.return(
         globalVariable.status.login_expired.code,
         globalVariable.status.login_expired.message,

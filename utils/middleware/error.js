@@ -13,7 +13,7 @@ const errorHandler = async function(ctx, next) {
   try {
     await next();
   } catch (error) {
-    ctx.log("500", ip + "; " + ctx.request.url + "; " + error.toString());
+    ctx.log("500", clientIp + "; " + ctx.request.url + "; " + error.toString());
 
     ctx.status = 500;
 

@@ -13,10 +13,14 @@ const dao = {
 
   // 用户注册
   register: async function(userJson) {
-    const data = await model.findOrCreate({
-      where: userJson,
-      logging: logging
-    });
+    const data = await model
+      .findOrCreate({
+        where: userJson,
+        logging: logging
+      })
+      .spread(function(account, created) {
+        return [account, created];
+      });
     return data;
   },
 

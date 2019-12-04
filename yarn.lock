@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+"@types/bluebird@*":
+  version "3.5.29"
+  resolved "http://artifactory.intra.xiaojukeji.com:80/artifactory/api/npm/npm/@types/bluebird/download/@types/bluebird-3.5.29.tgz#7cd933c902c4fc83046517a1bef973886d00bdb6"
+  integrity sha1-fNkzyQLE/IMEZRehvvlziG0AvbY=
+
+"@types/continuation-local-storage@*":
+  version "3.2.2"
+  resolved "http://artifactory.intra.xiaojukeji.com:80/artifactory/api/npm/npm/@types/continuation-local-storage/download/@types/continuation-local-storage-3.2.2.tgz#7cbf177a6206ece87bc4b808784772ad2aa5f6db"
+  integrity sha1-fL8XemIG7Oh7xLgIeEdyrSql9ts=
+  dependencies:
+    "@types/node" "*"
+
 "@types/events@*":
   version "3.0.0"
   resolved "http://artifactory.intra.xiaojukeji.com:80/artifactory/api/npm/npm/@types/events/download/@types/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -15,10 +27,30 @@
     "@types/events" "*"
     "@types/node" "*"
 
+"@types/lodash@*":
+  version "4.14.149"
+  resolved "http://artifactory.intra.xiaojukeji.com:80/artifactory/api/npm/npm/@types/lodash/download/@types/lodash-4.14.149.tgz#1342d63d948c6062838fbf961012f74d4e638440"
+  integrity sha1-E0LWPZSMYGKDj7+WEBL3TU5jhEA=
+
 "@types/node@*":
   version "12.12.7"
   resolved "http://artifactory.intra.xiaojukeji.com:80/artifactory/api/npm/npm/@types/node/download/@types/node-12.12.7.tgz#01e4ea724d9e3bd50d90c11fd5980ba317d8fa11"
   integrity sha1-AeTqck2eO9UNkMEf1ZgLoxfY+hE=
+
+"@types/sequelize@^4.28.8":
+  version "4.28.8"
+  resolved "http://artifactory.intra.xiaojukeji.com:80/artifactory/api/npm/npm/@types/sequelize/download/@types/sequelize-4.28.8.tgz#e97b5745d25c12881b348533c1d9e750adf8278b"
+  integrity sha1-6XtXRdJcEogbNIUzwdnnUK34J4s=
+  dependencies:
+    "@types/bluebird" "*"
+    "@types/continuation-local-storage" "*"
+    "@types/lodash" "*"
+    "@types/validator" "*"
+
+"@types/validator@*":
+  version "12.0.1"
+  resolved "http://artifactory.intra.xiaojukeji.com:80/artifactory/api/npm/npm/@types/validator/download/@types/validator-12.0.1.tgz#73dbc7f5f730ff7131754bca682824eb3c260b79"
+  integrity sha1-c9vH9fcw/3ExdUvKaCgk6zwmC3k=
 
 abbrev@1:
   version "1.1.1"

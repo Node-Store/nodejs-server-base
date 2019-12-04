@@ -10,7 +10,7 @@ const model = sequelize.define(
       type: sequelize.Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-      comment: "用户Id 自动生成"
+      comment: "用户Id"
     },
 
     phone: {
@@ -32,13 +32,14 @@ const model = sequelize.define(
     department: {
       type: sequelize.Sequelize.STRING,
       comment: "部门",
-      defaultValue: null
+      defaultValue: "default"
     },
 
     avatar: {
       type: sequelize.Sequelize.STRING,
       comment: "头像",
-      defaultValue: null
+      defaultValue:
+        "http://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
     },
 
     status: {
@@ -76,7 +77,20 @@ const model = sequelize.define(
     freezeTableName: true,
 
     // 定义表名
-    tableName: "user"
+    tableName: "user",
+    // 实例方法
+    instanceMethods: {
+      toJson: function() {
+        const data = {
+          id: this.get("id"),
+          name: this.get("name"),
+          avatar: this.get("avatar"),
+          phone: this.get("phone"),
+          department: this.get("department")
+        };
+        return data;
+      }
+    }
   }
 );
 

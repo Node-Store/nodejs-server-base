@@ -31,6 +31,7 @@ router.post("/", async function(ctx) {
 
   // phone is only one
   if (created) {
+    user.password = null;
     return ctx.return(0, CODE.USER_CREATE_SUCCESS, user);
   } else {
     return ctx.return(1, CODE.USER_EXIST, null);
